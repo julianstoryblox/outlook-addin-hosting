@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OfficeApp 
+  xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.microsoft.com/office/officeappbasictypes/1.0"
+  xsi:type="MailApp">
+
+  <!-- 1. Identificazione dell’Add-in -->
+  <Id>3f2504e0-4f89-11d3-9a0c-0305e82c3301</Id>
+  <Version>1.0.0.0</Version>
+  <ProviderName>Storyblox</ProviderName>
+  <DefaultLocale>it-IT</DefaultLocale>
+
+  <!-- 2. Nome e descrizione -->
+  <DisplayName DefaultValue="Invia a n8n"/>
+  <Description DefaultValue="Invia l’email selezionata al workflow n8n"/>
+
+  <!-- 3. Dove si “attacca” l’Add-in -->
+  <Hosts>
+    <Host Name="Mailbox"/>
+  </Hosts>
+
+  <Requirements>
+    <Sets>
+      <Set Name="Mailbox" MinVersion="1.1"/>
+    </Sets>
+  </Requirements>
+
+  <!-- 4. Definizione del pulsante nella ribbon di lettura -->
+  <ExtensionPoint xsi:type="MessageReadCommandSurface">
+    <OfficeTab id="TabDefault">
+      <Group id="CustomGroup">
+        <Label resid="groupLabel"/>
+        <Control xsi:type="Button" id="btnSendToN8N">
+          <Label resid="buttonLabel"/>
+          <Supertip>
+            <Title resid="buttonLabel"/>
+            <Description resid="buttonTip"/>
+          </Supertip>
+          <Icon>
+            <bt:Image size="16" resid="icon16"/>
+            <bt:Image size="32" resid="icon32"/>
+            <bt:Image size="80" resid="icon80"/>
+          </Icon>
+          <Action xsi:type="ExecuteFunction">
+            <FunctionName>sendToN8N</FunctionName>
+          </Action>
+        </Control>
+      </Group>
+    </OfficeTab>
+  </ExtensionPoint>
+
+  <!-- 5. Risorse: icone, URL dello script e stringhe localizzate -->
+  <Resources>
+    <bt:Images>
+      <bt:Image id="icon16" DefaultValue="https://julianstoryblox.github.io/outlook-addin-hosting/assets/icon16.png"/>
+      <bt:Image id="icon32" DefaultValue="https://julianstoryblox.github.io/outlook-addin-hosting/assets/icon32.png"/>
+      <bt:Image id="icon80" DefaultValue="https://julianstoryblox.github.io/outlook-addin-hosting/assets/icon80.png"/>
+    </bt:Images>
+    <bt:Urls>
+      <bt:Url id="functionFile" DefaultValue="https://julianstoryblox.github.io/outlook-addin-hosting/assets/functions.js"/>
+    </bt:Urls>
+    <bt:ShortStrings>
+      <bt:String id="groupLabel"   DefaultValue="n8n"/>
+      <bt:String id="buttonLabel"  DefaultValue="Invia a n8n"/>
+      <bt:String id="buttonTip"    DefaultValue="Invia la mail selezionata a n8n"/>
+    </bt:ShortStrings>
+  </Resources>
+
+</OfficeApp>
